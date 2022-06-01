@@ -16,18 +16,18 @@ public class AnimPlayer {
     public AnimPlayer(String name, int width, int height, float fps, Animation.PlayMode mode){
         this.loop = loop;
         texture = new Texture(name);
-        TextureRegion region = new TextureRegion(new Texture(name));
+        TextureRegion region = new TextureRegion(texture);
         TextureRegion[][] regions = region.split(region.getRegionWidth()/width, region.getRegionHeight()/height);
         TextureRegion[] regions1 = new TextureRegion[width  * height];
 
         int cnt = 0;
-        for (int i = 0; i < regions.length; i++) {
-            for (int j = 0; j < regions[i].length; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 regions1[cnt++] = regions[i][j];
             }
         }
 
-        animation = new Animation<TextureRegion>(1.0f/fps, regions1);//Сколько будет показывать кадр, откуда берет кадр!
+        animation = new Animation<>(1.0f/fps, regions1);//Сколько будет показывать кадр, откуда берет кадр!
         animation.setPlayMode(mode);
     }
 
@@ -35,7 +35,7 @@ public class AnimPlayer {
         this.time += time;
     }
 
-    public TextureRegion getFrame() {
+    public TextureRegion getTexture() {
         return animation.getKeyFrame(time);
     }
 

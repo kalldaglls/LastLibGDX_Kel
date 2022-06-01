@@ -23,7 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {//Здесь инициализируем поля!
 		batch = new SpriteBatch();
 		batmanAnim = new AnimPlayer("Batman.png", 8, 1, 10.0f, Animation.PlayMode.LOOP);
-		//batmanAnim2 = new AnimPlayer("runRight.png", 8, 1, 10.0f, Animation.PlayMode.LOOP);
+//		batmanAnim2 = new AnimPlayer("batmanadventure.png", 8, 1, 10.0f, true);
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch.begin();
 
-		batch.draw(batmanAnim.getFrame(), x, 50, 50f, 50f);//Почему отрисовывается только первый бэт?
-		//batch.draw(batmanAnim2.getFrame(), x, 0, 50f, 50f);
+		batch.draw(batmanAnim.getTexture(), x, 0);//Почему отрисовывается только первый бэт?
+//		batch.draw(batmanAnim2.getTexture(), x, 0);
 		batch.end();
 	}
 
