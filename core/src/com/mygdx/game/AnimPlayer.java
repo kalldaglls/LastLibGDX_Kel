@@ -35,7 +35,7 @@ public class AnimPlayer {
         this.time += time;
     }
 
-    public TextureRegion getTexture() {
+    public TextureRegion getFrame() {
         return animation.getKeyFrame(time);
     }
 

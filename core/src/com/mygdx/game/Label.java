@@ -3,12 +3,16 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class Label {
-    BitmapFont bitmapFont;
+   private BitmapFont bitmapFont;
 
-    public Label() {
-        //FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator();
+    public Label(int size) {
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("comic shanns.otf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = size;
+        fontParameter.characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.!/':;0123456789+-=";
         bitmapFont = new BitmapFont();
        // bitmapFont.getData().setScale(3);
     }
