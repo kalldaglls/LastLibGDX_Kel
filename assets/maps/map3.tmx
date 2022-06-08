@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="120" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="17">
+ <tileset firstgid="1" name="Большой Папа" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
+  <image source="1626794363_10-kartinkin-com-p-piksel-art-taili-art-krasivo-10.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="Сбоку" tilewidth="16" tileheight="16" tilecount="136" columns="17">
+  <image source="sheet.png" width="272" height="128"/>
+ </tileset>
+ <tileset firstgid="4233" name="1640652370_1-abrakadabra-fun-p-spraiti-dlya-igri-mario-na-skretch-2" tilewidth="16" tileheight="16" tilecount="34969" columns="187">
+  <image source="1640652370_1-abrakadabra-fun-p-spraiti-dlya-igri-mario-na-skretch-2.png" width="3000" height="3000"/>
+ </tileset>
+ <objectgroup id="3" name="Слой объектов 1" offsetx="-230.667" offsety="191.333">
+  <object id="5" name="camera" x="271" y="190">
+   <point/>
+  </object>
+ </objectgroup>
+ <layer id="6" name="Слой тайлов 2" width="120" height="26">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Монетки" offsetx="0.666667" offsety="-3.33333">
+  <object id="7" x="191.333" y="98" width="33.3333" height="31.3333"/>
+  <object id="8" x="1104" y="370.667">
+   <point/>
+  </object>
+  <object id="9" x="319.333" y="384.667">
+   <point/>
+  </object>
+  <object id="10" x="697.333" y="384">
+   <point/>
+  </object>
+  <object id="11" x="492.667" y="258">
+   <point/>
+  </object>
+  <object id="12" x="202" y="387.333">
+   <point/>
+  </object>
+  <object id="15" x="1595.33" y="362">
+   <point/>
+  </object>
+  <object id="16" x="1822" y="367.333">
+   <point/>
+  </object>
+ </objectgroup>
+ <layer id="5" name="Слой тайлов 1" width="120" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztlM9LAlEUhQfKNo54F6UbR3SRtq2gbJuBP9ClYIqbyIUVbYOy/70TKJp3Gt8Yknc8H3zMHO7jzZs5MJ5HCCGEEEIIIYQQQgghhBBCCCGEbEZaPK8DfZiR6LUHmB/CFDwSncnuUZj1G8Dimo6OMT+BOZgXnS2SNXpuV+L0e4p5BVbhmehsjbTjf8sycfq9wvwa1uCN6GyNguN7WyZOvw3Mm7AF26KzNQJZmFTi9NvH/B4O4FB0tsa+9Dty7HeC+RN8hi+iszX+u9/SynPfIs7hS/i6c9xfwMtf5t/9vjr2+475B5zCT9H5rzxij/HSPr78dN36OT3RhuHS7+o3j8rdkH3KEe+TZG9hfel6twNn2rbBHvkQYtK/wRfJfkvG
+  </data>
+ </layer>
+</map>

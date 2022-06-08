@@ -36,32 +36,42 @@ public class MyGdxGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private List<Coin> coinList;
 
-	private int[] foreGrounde, backGrounde;
+	private int[] foreGround, backGround;
 
 	@Override
 	public void create () {//Здесь инициализируем поля!
-		map = new TmxMapLoader().load("maps/Second.tmx");
+//		map = new TmxMapLoader().load("maps/Second.tmx");
+		map = new TmxMapLoader().load("maps/map3.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+//		foreGround = new int[1];
+//		foreGround[0] = map.getLayers().getIndex("Слой тайлов 2");
+//		backGround = new int[1];
+//		backGround[0] = map.getLayers().getIndex("Слой тайлов 1");
+
 
 		batch = new SpriteBatch();
 		batmanAnim = new AnimPlayer("Batman.png", 8, 1, 10.0f, Animation.PlayMode.LOOP);
-//		batmanAnim2 = new AnimPlayer("batmanadventure.png", 8, 1, 10.0f, true);
+
 		label = new Label(36);
+
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Mapik").getObjects().get("camera");
+		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 1").getObjects().get("camera");
 		camera.position.x = o.getRectangle().x;
 		camera.position.y = o.getRectangle().y;
+		camera.zoom = 0.5f;
 		camera.update();
 
 		coinList = new ArrayList<>();
-		MapLayer ml = map.getLayers().get("монетки");
-		if (ml != null){
-			MapObjects mo = ml.getObjects();
+//		coinList.add(new Coin(new Vector2(0,0)));
+		MapLayer ml = map.getLayers().get("Монетки");//Берем слой с монетками
+		if (ml != null){//Если слой существует...
+			MapObjects mo = ml.getObjects();//Берем все объекты со слоя
 			if (mo.getCount()>0){
 				for (int i=0;i<mo.getCount();i++){
-					RectangleMapObject tmpMo = (RectangleMapObject) ml.getObjects().get(i);
-					Rectangle rect = tmpMo.getRectangle();
-					coinList.add(new Coin(new Vector2(rect.x,rect.y)));
+					RectangleMapObject tmpMo = (RectangleMapObject) ml.getObjects().get(i);//Берем очередной объект и кастим его в прямоугольный объект
+					Rectangle rect = tmpMo.getRectangle();//Вытаскиваем из него прямоугольник
+					coinList.add(new Coin(new Vector2(rect.x,rect.y)));//Добавляем монетку в x y.
 				}
 			}
 		}
@@ -77,6 +87,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) camera.position.x++;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y++;
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y--;
+
 		camera.update();
 
 		mapRenderer.setView(camera);
@@ -86,15 +97,23 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch.begin();
 
-		batch.draw(batmanAnim.getFrame(), Gdx.graphics.getWidth()/8, Gdx.graphics.getHeight()/8);//Почему отрисовывается только первый бэт?
-//		batch.draw(batmanAnim2.getTexture(), x, 0);
+		batch.draw(batmanAnim.getFrame(), 50f, 50f, 50f, 50f);//Почему отрисовывается только первый бэт?
+
 		label.draw(batch, "Welcome to Gotham!");
+
+		for (int i=0;i<coinList.size();i++){
+			coinList.get(i).draw(batch, camera);
+		}
+
 		batch.end();
+
+		//mapRenderer.render(foreGround);
 	}
 
 	@Override
 	public void dispose () {//Здесь закрываем/удаляем/освобождаем ресурсы!
 		batch.dispose();
 		batmanAnim.dispose();
+		coinList.get(0).dispose();
 	}
 }
