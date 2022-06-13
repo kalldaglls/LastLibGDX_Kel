@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="13">
+ <tileset firstgid="1" name="Большой Папа" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
+  <image source="1626794363_10-kartinkin-com-p-piksel-art-taili-art-krasivo-10.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="1640652370_1-abrakadabra-fun-p-spraiti-dlya-igri-mario-na-skretch-2" tilewidth="16" tileheight="16" tilecount="34969" columns="187">
+  <image source="1640652370_1-abrakadabra-fun-p-spraiti-dlya-igri-mario-na-skretch-2.png" width="3000" height="3000"/>
+ </tileset>
+ <layer id="1" name="Слой тайлов 1" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1FmSgjAUhWGLwdlNKY7gpsQJ1E05K7in/lOdh64uAlGheOHhq1RyCQevgb5Zq/UrpTMMRgzgYIgRxpjkMJ/BhYe5kfAMrC3gY4kV1thgm8M8xA57HJLycWT9JJ1xwRU33PHAU66nSdojRIjxUuQbMM3ffIvRRh0NNDXmAUK0ErTRQRe9lHOQR/40wQwuvIxzOCg4f5+R7xecH2fkn0ruv2mVnF/y78/j/AV/hG/m+7IH3+aHH+absgcOhhhhjInGXJUfvtl/0YMlVlhjg63GXJX/lPk7zf6Ld/CMC6644a4xT8sXY6SRL7LFO2jBRh0NNNGSazr+72ujY2V8/6gP4GCIEcaYYIoZXHiKuu7euZWcv2DdxxJrbLBFgBA7SdRXKdeo6qK2x0GRfxTfPpxxxQ13PPBEJIn6JeUaVV3UYrwU+YbNfw/LTj8jn+pw3y56Bd2/UqlU3vEDXkk8qw==
+  </data>
+ </layer>
+ <objectgroup id="3" name="Слой объектов 1">
+  <object id="5" name="camera" x="271" y="190">
+   <point/>
+  </object>
+  <object id="6" name="cube" x="352.667" y="185.333" width="65.3333" height="44.6667"/>
+ </objectgroup>
+ <objectgroup id="4" name="Монетки">
+  <object id="7" x="191.333" y="98" width="33.3333" height="31.3333"/>
+  <object id="8" x="134" y="188.667">
+   <point/>
+  </object>
+  <object id="9" x="248" y="288.667">
+   <point/>
+  </object>
+  <object id="10" x="331.333" y="114.667">
+   <point/>
+  </object>
+  <object id="11" x="440" y="235.333">
+   <point/>
+  </object>
+  <object id="12" x="223.333" y="408">
+   <point/>
+  </object>
+ </objectgroup>
+ <layer id="2" name="Слой тайлов 2" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1jdvU1EYgOHPLVzAjuOWPaT8AwgrJaIs7tlTV1goKymiBnd26kLLEmAlgKjBnZ26UBcSRl6UK/nauiLmxkVC/qRHls6x/Maxz5FFGjvn7SIXsGBv8AvXOS/pvsJKm/rbHSJ2OBzt6ccsInEkkEQKaWQsjWv0YQf6MYBBDKl7WTo55FFAESWUG9gfwzgmMIkpTKt7TqtID1xwwwMvfNZ/75y2iZzBWZyzVdYv4wqu4hqu44a656cTQBAhhBFB1ED/Kc1neI4Xmv5bvMN7fMBHfFL3YnTiSCCJFNLIGOhv6RJRsBXbuirrfSY+f/RjAIMYMq3vZenkkEcBRZRQNtA/QPMgDuGwpj9GaxwTmMQUptW+k/9TD1xwwwMvfDb9xmbmplnklrny+Gf8dAIIIoQwIoga6J/iDpvBLOYwX3Onfab5xVx5NDqrnM01nfP5kN4yHuExnujcqdr3Xju3ef6dDe7hnXwvdmEYu2u+IybuUDMssMKmc6f+7b1/pf1tg/4xmsdxAidr+nvo7cU+7MdIE+70JZr3cB8P6jgjC5yDi4ghjgSS6tk4oogcVaqfr7emnZ80V7GGX3X0V2i9RhY55FFQ+3fpLCrVXe1as+c7nR9K9d+iXWvltKvbmc40Y2LcfXEkkEQKaWRwqQW/dbM0csijgCJKKONNC/rObn5XwAU3PPDCh97u5vf9NAIIIoQwIohitAX9zvyf8xtkTXuY
+  </data>
+ </layer>
+</map>
