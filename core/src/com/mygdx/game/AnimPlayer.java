@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 public class AnimPlayer {
     Texture texture;
     Animation<TextureRegion> animation;
@@ -13,7 +15,7 @@ public class AnimPlayer {
     boolean loop;
 
 
-    public AnimPlayer(String name, int width, int height, float fps, Animation.PlayMode mode){
+    public AnimPlayer(String name, int width, int height, float fps, Animation.PlayMode mode){// Понятно, что каждая строка делает, но как это работает в общем?
         this.loop = loop;
         texture = new Texture(name);
         TextureRegion region = new TextureRegion(texture);
