@@ -11,6 +11,7 @@ public class MyCharacter {
     private boolean isJump, isWalk, dir;
     private Vector2 pos;
     private Rectangle rect;
+    private float dTime;
 //    private int x,y;
 
     public MyCharacter() {
@@ -49,24 +50,37 @@ public class MyCharacter {
         isWalk = walk;
     }
 
+    public void setdTime(float dTime) {
+        this.dTime = dTime;
+    }
+
     public TextureRegion getFrame(){
-        TextureRegion tmpTex = null;
-        if (!isJump && !isWalk && !dir) {
+//        dTime = Gdx.graphics.getDeltaTime();
+        TextureRegion tmpTex; //= null;
+        if (!isJump && !isWalk && !dir) {//Начинаем писать 1:47:10!!!
             idle.step(Gdx.graphics.getDeltaTime());
-            idle.getFrame().flip(false, false);
+            if(idle.getFrame().isFlipX()) idle.getFrame().flip(true, false);//1:51:10 Про flip!!!2:01:30 говорит, зеркалировать текстурный регион или не зеркалировать по иксу и по игрику!
             tmpTex = idle.getFrame();
         } else if (!isJump && !isWalk && dir) {
             idle.step(Gdx.graphics.getDeltaTime());
-            idle.getFrame().flip(true, false);
+            if(!idle.getFrame().isFlipX()) idle.getFrame().flip(true, false);
             tmpTex = idle.getFrame();
         } else  if (!isJump && isWalk && !dir) {
             walkRight.step(Gdx.graphics.getDeltaTime());
-            walkRight.getFrame().flip(false, false);
+            if(walkRight.getFrame().isFlipX()) walkRight.getFrame().flip(true, false);
             tmpTex = walkRight.getFrame();
         } else  if (!isJump && isWalk && dir) {
             walkRight.step(Gdx.graphics.getDeltaTime());
-            walkRight.getFrame().flip(true, false);
+           if(!walkRight.getFrame().isFlipX()) walkRight.getFrame().flip(true, false);
             tmpTex = walkRight.getFrame();
+        } else  if (isJump && isWalk && dir) {
+            jump.step(Gdx.graphics.getDeltaTime());
+            if (!jump.getFrame().isFlipX()) jump.getFrame().flip(true, false);
+            tmpTex = jump.getFrame();
+        } else {
+            jump.step(Gdx.graphics.getDeltaTime());
+            if (jump.getFrame().isFlipX()) jump.getFrame().flip(true, false);
+            tmpTex = jump.getFrame();
         }
         return tmpTex;
         }
