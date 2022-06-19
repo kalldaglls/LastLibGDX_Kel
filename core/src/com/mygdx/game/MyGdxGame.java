@@ -10,12 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -54,6 +54,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private Box2DDebugRenderer debugRenderer;
 	private boolean start;
 	private Body heroBody;
+	private MapObject obj;
 
 	@Override
 	public void create () {//Здесь инициализируем поля!
@@ -65,7 +66,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		BodyDef def = new BodyDef();
 		def.gravityScale = 1.0f;//Масса тела
-		def.position.set(new Vector2(0f,0f));// Где в пространстве находится тело
+		def.position.set(new Vector2(2f,404f));// Где в пространстве находится тело
+		RectangleMapObject rectangle = (RectangleMapObject) obj;
+		//def.position.set(new Vector2(rectangle.getRectangle().x+rectangle.getRectangle().width/2 , rectangle.getRectangle().y+rectangle.getRectangle().height/2));
 		def.type = BodyDef.BodyType.StaticBody;//Есть три типа тела: статик, динамик и кинематик
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.density = 0;
@@ -73,38 +76,38 @@ public class MyGdxGame extends ApplicationAdapter {
 		fixtureDef.restitution = 0f;
 
 
-		polygonShape.setAsBox(100,10);//Что-то вроде радиусов для квадрата!
+		polygonShape.setAsBox(20,20);//Что-то вроде радиусов для квадрата!
 		fixtureDef.shape = polygonShape;
 		//polygonShape.dispose();
 
 		world.createBody(def).createFixture(fixtureDef);
 
-		def.position.set(new Vector2(MathUtils.random(-50f, 150f),150f));
-			def.type = BodyDef.BodyType.DynamicBody;
-			def.gravityScale = 0f;
+//		def.position.set(new Vector2(MathUtils.random(-50f, 150f),150f));
+//			def.type = BodyDef.BodyType.DynamicBody;
+//			def.gravityScale = 0f;
 
 			float size = 20f;
-			polygonShape.setAsBox(size,size);
-			fixtureDef.shape = polygonShape;
+//			polygonShape.setAsBox(size,size);
+//			fixtureDef.shape = polygonShape;
+//
+//			world.createBody(def).createFixture(fixtureDef);
 
-			world.createBody(def).createFixture(fixtureDef);
+//		for (int i = 0; i < 10; i++) {
+//			def.position.set(new Vector2(MathUtils.random(-50f, 150f),150f));
+//			def.type = BodyDef.BodyType.DynamicBody;
+//			def.gravityScale = MathUtils.random(5f, 10f);
+//
+//			size = MathUtils.random(3f, 15f);
+//			polygonShape.setAsBox(size,size);
+//			fixtureDef.shape = polygonShape;
+//			fixtureDef.friction = MathUtils.random(0.5f, 1f);
+//			fixtureDef.density = MathUtils.random(0.5f, 1f);
+//			fixtureDef.restitution = MathUtils.random(0.1f, 0.3f);
+//
+//			world.createBody(def).createFixture(fixtureDef);
+//		}
 
-		for (int i = 0; i < 10; i++) {
-			def.position.set(new Vector2(MathUtils.random(-50f, 150f),150f));
-			def.type = BodyDef.BodyType.DynamicBody;
-			def.gravityScale = MathUtils.random(5f, 10f);
-
-			size = MathUtils.random(3f, 15f);
-			polygonShape.setAsBox(size,size);
-			fixtureDef.shape = polygonShape;
-			fixtureDef.friction = MathUtils.random(0.5f, 1f);
-			fixtureDef.density = MathUtils.random(0.5f, 1f);
-			fixtureDef.restitution = MathUtils.random(0.1f, 0.3f);
-
-			world.createBody(def).createFixture(fixtureDef);
-		}
-
-		def.position.set(new Vector2(100f,100f));
+		def.position.set(new Vector2(10f,36f));
 		def.type = BodyDef.BodyType.DynamicBody;
 		def.gravityScale = 1f;
 		size = 5f;
@@ -127,10 +130,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		System.out.printf("Step 1");
 
 		physX = new PhysX();
-//		if(map.getLayers().get("land")!= null){
-//			MapObjects mo = map.getLayers().get("land").getObjects();
-//			physX.addObject(mo);
-//		}
+		if(map.getLayers().get("land")!= null){
+			MapObjects mo = map.getLayers().get("land").getObjects();
+			physX.addObjects(mo);
+			MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
+			physX.addObject(mo1);
+		}
 
 		foreGround = new int[1];
 		foreGround[0] = map.getLayers().getIndex("Слой тайлов 1");
@@ -148,8 +153,13 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//Почему всегда используем gdx.graphics.get...?
 		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 1").getObjects().get("camera");
-		camera.position.x = o.getRectangle().x;
-		camera.position.y = o.getRectangle().y;
+
+		camera.position.x = physX.getHero().getPosition().x;
+		camera.position.y = physX.getHero().getPosition().y;
+
+
+//		camera.position.x = o.getRectangle().x;
+//		camera.position.y = o.getRectangle().y;
 		camera.zoom = 0.5f;
 		camera.update();
 
@@ -177,31 +187,36 @@ public class MyGdxGame extends ApplicationAdapter {
 		chip.setWalk(false);
 //		chip.setDir(false);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {//Пишем камеры для перса 1:58:12!!
-			heroBody.applyForceToCenter(new Vector2(-20f, 0f), true);
+			//heroBody.applyForceToCenter(new Vector2(-20f, 0f), true);
 			//camera.position.x--;
+			physX.setHeroForce(new Vector2(-3000, 0));
 			chip.setDir(true);
 			chip.setWalk(true);
 //			chip.setDir(false);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			heroBody.applyForceToCenter(new Vector2(20f, 0f), true);
+//			heroBody.applyForceToCenter(new Vector2(20f, 0f), true);
 //			camera.position.x++;
+			physX.setHeroForce(new Vector2(3000, 0));
 			chip.setDir(false);
 			chip.setWalk(true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			physX.setHeroForce(new Vector2(0, 1000));
 //			camera.position.y++;
-			//heroBody.applyForceToCenter(new Vector2(0f,3000f), true);
+//			heroBody.applyForceToCenter(new Vector2(0f,20f), true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-//			camera.position.y--;
-			//heroBody.applyForceToCenter(new Vector2(0f, -3000f), true);
+			camera.position.y--;
+			heroBody.applyForceToCenter(new Vector2(0f, -20f), true);
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 		if(Gdx.input.isKeyPressed(Input.Keys.S)) start = true;
 
-		camera.position.x = heroBody.getPosition().x;
-		camera.position.y = heroBody.getPosition().y;
+//		camera.position.x = heroBody.getPosition().x;
+//		camera.position.y = heroBody.getPosition().y;
+		camera.position.x = physX.getHero().getPosition().x;
+		camera.position.y = physX.getHero().getPosition().y;
 		camera.update();
 
 		batch.begin();
@@ -257,8 +272,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(start) world.step(1/60.0f, 3, 3);// Если это не прописать, то динам тела будут спать!
 		debugRenderer.render(world, camera.combined);// Рисуем мир и объекты в нем!
 
-		if(true) physX.step();
-		physX.debugDraw(camera);
+		if(start) physX.step();//Включаем физику!
+		physX.debugDraw(camera);//Покажи нам физику!
 	}
 
 	@Override
@@ -267,5 +282,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	//	batmanAnim.dispose();
 		coinList.get(0).dispose();
 		world.dispose();
+		physX.dispose();
 	}
 }
