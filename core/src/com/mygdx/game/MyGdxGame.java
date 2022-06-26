@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -55,6 +56,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	private boolean start;
 	private Body heroBody;
 	private MapObject obj;
+
+	private Music music;
 
 	@Override
 	public void create () {//Здесь инициализируем поля!
@@ -137,6 +140,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			physX.addObject(mo1);
 		}
 
+//		if(map.getLayers().get("Слой объектов 1")!= null){
+//			MapObjects mo = map.getLayers().get("Слой объектов 1").getObjects();
+//			physX.addObjects(mo);
+//			MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
+//			physX.addObject(mo1);
+//		}
+
 		foreGround = new int[1];
 		foreGround[0] = map.getLayers().getIndex("Слой тайлов 1");
 		backGround = new int[1];
@@ -176,6 +186,12 @@ public class MyGdxGame extends ApplicationAdapter {
 				}
 			}
 		}
+
+		music = Gdx.audio.newMusic(Gdx.files.internal("StartMusic.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.025f);//Регулировка микшера
+
+		music.play();
 	}
 
 	@Override
@@ -189,7 +205,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {//Пишем камеры для перса 1:58:12!!
 			//heroBody.applyForceToCenter(new Vector2(-20f, 0f), true);
 			//camera.position.x--;
-			physX.setHeroForce(new Vector2(-3000, 0));
+			physX.setHeroForce(new Vector2(-30000, 0));
 			chip.setDir(true);
 			chip.setWalk(true);
 //			chip.setDir(false);
@@ -197,18 +213,19 @@ public class MyGdxGame extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 //			heroBody.applyForceToCenter(new Vector2(20f, 0f), true);
 //			camera.position.x++;
-			physX.setHeroForce(new Vector2(3000, 0));
+			physX.setHeroForce(new Vector2(30000, 0));
 			chip.setDir(false);
 			chip.setWalk(true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			physX.setHeroForce(new Vector2(0, 1000));
+			physX.setHeroForce(new Vector2(0, 30000));
 //			camera.position.y++;
 //			heroBody.applyForceToCenter(new Vector2(0f,20f), true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			camera.position.y--;
-			heroBody.applyForceToCenter(new Vector2(0f, -20f), true);
+//			camera.position.y--;
+//			heroBody.applyForceToCenter(new Vector2(0f, -20000f), true);
+			physX.setHeroForce(new Vector2(0, -10000));
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 		if(Gdx.input.isKeyPressed(Input.Keys.S)) start = true;
@@ -237,10 +254,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		label.draw(batch, "Coins gathered: " + String.valueOf(score));
 
 		for (int i=0;i<coinList.size();i++){
-			coinList.get(i).draw(batch, camera);
+			int state;
+			state = coinList.get(i).draw(batch, camera);
 			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
-				coinList.remove(i);
-				score++;
+				if (state == 0)coinList.get(i).setState();
+				if (state == 2) {
+					coinList.remove(i);
+					score++;
+				}
 			}
 		}
 
@@ -274,6 +295,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		if(start) physX.step();//Включаем физику!
 		physX.debugDraw(camera);//Покажи нам физику!
+
 	}
 
 	@Override
@@ -283,5 +305,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		coinList.get(0).dispose();
 		world.dispose();
 		physX.dispose();
+		music.stop();
+		music.dispose();
 	}
 }

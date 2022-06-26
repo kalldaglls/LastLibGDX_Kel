@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="120" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="53">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="120" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="81">
  <tileset firstgid="1" name="Большой Папа" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="1626794363_10-kartinkin-com-p-piksel-art-taili-art-krasivo-10.png" width="1024" height="1024"/>
  </tileset>
@@ -15,77 +15,106 @@
  <tileset firstgid="39338" name="sheet" tilewidth="16" tileheight="16" tilecount="136" columns="17">
   <image source="sheet.png" width="272" height="128"/>
  </tileset>
- <layer id="6" name="Слой тайлов 2" width="120" height="26">
+ <tileset firstgid="39474" name="sheet2" tilewidth="16" tileheight="16" spacing="1" tilecount="112" columns="16">
+  <image source="sheet.png" width="272" height="128"/>
+ </tileset>
+ <layer id="6" name="Слой тайлов 2" width="120" height="34">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer id="5" name="Слой тайлов 1" width="120" height="26">
+ <layer id="5" name="Слой тайлов 1" width="120" height="34">
   <data encoding="base64" compression="zlib">
-   eJztlE1LAlEYhQeyNk70Lko3TtSiD9ypkLq1oA9qGfS5CV2Y4law/CH+207k0Og7Xu8I0tzpPPAwc3gvd+7MgfE8QgghhBBCCCGEEEIIIYQQQgghZDXy4nm30IfbYl67gXkObsIt0Zmkj9K03wDuL+loF/M9WIBF0dlFdhw9ty1J+j3C/BiewFPR2TXylv8tl0nS7xnmddiATdHZNUqW7+0ySfq9xPwKXsMb0dk1Avk1qyTp9wHzR/gEn0Vn1/gv/b5a9tvF/B32YF90NvEy+TFN/HW/B3PPHRrO4Uv8ugruq7C2YP7d78Cy3xHmH/ATjkXnKOXJrCGmjtvYoxPZx5dZl60PuRdtHDb9zn9zU76L2efQ8D5ZtgXPI9eLFJxp3QYZNvw/h/ktxqx/gy83A1NB
+   eJzt1ElLw1AUhuGAw6YVz8Jh04guHHCngsO2Cg7oUnDciC4ccCs4/JD+Wz/RYNobb28EMTd9H3hpDzekaQ80SQAAAAAAAAAAAAAA+J2GJcmhaqox8187pPNhNaJGzZ1RPa2v/aZqps+OJnQ+qabUtLlzjMYjfe5QZfY7r/MFtaiWzJ1j0wj834pZmf2u63xDbaotc+fYtAK/d8zK7HdX53tqXx2YO8cmte/qqsx+T3R+qs7UublzbAZlv5eB+73V+Z26Vw/mzj4Xnc+q5L/3O9vzuU+e52ha8XUrer+q1n44/9jvY+B+n3X+ol7Vm7lz3nKnu4xvx9e6x03uPk3rrt/1mWNzKxKy397f3DcfFdxnzvN96lxbbededyrwTH9dWuOy/+dsviqo7r8BAAAAAACD4B1PMlNB
   </data>
  </layer>
- <objectgroup id="3" name="Слой объектов 1" offsetx="-230.667" offsety="191.333">
-  <object id="50" name="hero" x="267.334" y="161.334" width="19.3333" height="15.3333">
+ <objectgroup id="3" name="Слой объектов 1">
+  <object id="50" name="hero" x="61.0007" y="360.001" width="16" height="16">
    <properties>
-    <property name="density" type="float" value="2"/>
+    <property name="awake" type="bool" value="false"/>
+    <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="0.025"/>
-    <property name="gravityScale" type="float" value="5"/>
+    <property name="gravityScale" type="float" value="1"/>
     <property name="name" value="hero"/>
-    <property name="restitution" type="float" value="0.5"/>
+    <property name="restitution" type="float" value="0"/>
     <property name="type" value="DynamicBody"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="4" name="Монетки" offsetx="0.666667" offsety="-3.33333">
+ <objectgroup id="4" name="Монетки">
   <object id="8" x="1104" y="370.667">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
   <object id="9" x="319.333" y="384.667">
    <properties>
     <property name="Sum" type="int" value="123"/>
+    <property name="awake" type="bool" value="false"/>
    </properties>
    <point/>
   </object>
   <object id="10" x="697.333" y="384">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
   <object id="11" x="492.667" y="258">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
   <object id="12" x="202" y="387.333">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
   <object id="15" x="1595.33" y="362">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
   <object id="16" x="1688.67" y="252.666">
+   <properties>
+    <property name="awake" type="bool" value="false"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="7" name="land">
-  <object id="34" name="wall1" x="-22" y="0" width="55.75" height="413">
+  <object id="34" name="wall1" x="-22" y="0" width="22.4167" height="413">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="1.5"/>
     <property name="name" value="wall1"/>
-    <property name="restitution" type="float" value="0.2"/>
+    <property name="restitution" type="float" value="0"/>
     <property name="type" value="StaticBody"/>
    </properties>
   </object>
-  <object id="39" x="318.792" y="38.5" width="25" height="25">
+  <object id="39" x="733.459" y="49.1667" width="25" height="25">
    <properties>
-    <property name="density" type="float" value="1"/>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="3"/>
     <property name="friction" type="float" value="1"/>
-    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="gravityScale" type="float" value="4"/>
     <property name="name" value="wall1"/>
     <property name="restitution" type="float" value="0.2"/>
     <property name="type" value="DynamicBody"/>
    </properties>
   </object>
-  <object id="40" name="wall1" x="162.125" y="106.583" width="148.417" height="15.6667">
+  <object id="40" name="wall1" x="587.458" y="150.583" width="148.417" height="15.6667">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="0.5"/>
@@ -94,8 +123,10 @@
     <property name="type" value="DynamicBody"/>
    </properties>
   </object>
-  <object id="42" x="131" y="169" width="49" height="49">
+  <object id="42" x="600.333" y="239.667" width="49" height="49">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="0"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="0.5"/>
@@ -107,6 +138,8 @@
   </object>
   <object id="44" name="wall1" x="-15.875" y="415.5" width="960.417" height="11">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="1.5"/>
@@ -117,6 +150,8 @@
   </object>
   <object id="47" name="wall1" x="1025.46" y="385.833" width="891.083" height="9.66667">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="1.5"/>
@@ -127,6 +162,8 @@
   </object>
   <object id="46" name="wall1" x="1088.12" y="367.167" width="67.0833" height="15">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="1.5"/>
@@ -135,8 +172,10 @@
     <property name="type" value="StaticBody"/>
    </properties>
   </object>
-  <object id="51" x="38" y="385.333" width="388.667" height="14.6667">
+  <object id="51" x="38" y="385.333" width="422.667" height="14.6667">
    <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="1.5"/>
@@ -144,6 +183,115 @@
     <property name="restitution" type="float" value="0.2"/>
     <property name="type" value="StaticBody"/>
    </properties>
+  </object>
+  <object id="55" name="wall1" x="924.458" y="425.167" width="16.4166" height="103.667">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="56" name="wall1" x="941.792" y="528.5" width="85.0833" height="15">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="57" name="wall1" x="1023.13" y="398.167" width="16.4166" height="130.334">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="59" name="wall1" x="1908.49" y="-3.4697" width="55.75" height="413">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="62" x="479" y="264.917" width="16.3337" height="6.6667">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="63" x="495.833" y="256.667" width="30.5837" height="127.417">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="64" x="465.708" y="256.541" width="14.5837" height="127.417">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall1"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="71" x="529.375" y="224.958" width="14.5837" height="98.7503">
+   <properties>
+    <property name="angle" type="float" value="100"/>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.5"/>
+    <property name="name" value="wall2"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="80" x="140.833" y="280.833" width="33" height="31.6667">
+   <properties>
+    <property name="angle" type="float" value="0"/>
+    <property name="awake" type="bool" value="false"/>
+    <property name="density" type="float" value="0"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="0.5"/>
+    <property name="name" value="rock"/>
+    <property name="restitution" type="float" value="0.2"/>
+    <property name="type" value="DynamicBody"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>
