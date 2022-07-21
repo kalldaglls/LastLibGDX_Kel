@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
@@ -59,8 +61,13 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private Music music;
 
+	//final Game game;
+
 	@Override
 	public void create () {//Здесь инициализируем поля!
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		physX = new PhysX();
+
 		chip = new MyCharacter();
 
 		world = new World(new Vector2(0, -9.81f), true);// Гравитация и to sleep
@@ -82,7 +89,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		polygonShape.setAsBox(20,20);//Что-то вроде радиусов для квадрата!
 		fixtureDef.shape = polygonShape;
 		//polygonShape.dispose();
-
 		world.createBody(def).createFixture(fixtureDef);
 
 //		def.position.set(new Vector2(MathUtils.random(-50f, 150f),150f));
@@ -129,16 +135,19 @@ public class MyGdxGame extends ApplicationAdapter {
 //		map = new TmxMapLoader().load("maps/Second.tmx");
 		map = new TmxMapLoader().load("maps/map3.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
+		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 1").getObjects().get("camera");
 
 		System.out.printf("Step 1");
 
-		physX = new PhysX();
+		//physX = new PhysX();
 		if(map.getLayers().get("land")!= null){
 			MapObjects mo = map.getLayers().get("land").getObjects();
 			physX.addObjects(mo);
-			MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
-			physX.addObject(mo1);
+//			MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
+//			physX.addObject(mo1);
 		}
+		MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
+		physX.addObject(mo1, chip.getRect(camera));
 
 //		if(map.getLayers().get("Слой объектов 1")!= null){
 //			MapObjects mo = map.getLayers().get("Слой объектов 1").getObjects();
@@ -146,6 +155,7 @@ public class MyGdxGame extends ApplicationAdapter {
 //			MapObject mo1 = map.getLayers().get("Слой объектов 1").getObjects().get("hero");
 //			physX.addObject(mo1);
 //		}
+
 
 		foreGround = new int[1];
 		foreGround[0] = map.getLayers().getIndex("Слой тайлов 1");
@@ -161,17 +171,17 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		label = new Label(36);
 
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//Почему всегда используем gdx.graphics.get...?
-		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 1").getObjects().get("camera");
-
-		camera.position.x = physX.getHero().getPosition().x;
-		camera.position.y = physX.getHero().getPosition().y;
+//		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//Почему всегда используем gdx.graphics.get...?
+//		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 1").getObjects().get("camera");
+//
+//		camera.position.x = physX.getHero().getPosition().x;
+//		camera.position.y = physX.getHero().getPosition().y;
 
 
 //		camera.position.x = o.getRectangle().x;
 //		camera.position.y = o.getRectangle().y;
-		camera.zoom = 0.5f;
-		camera.update();
+//		camera.zoom = 0.5f;
+//		camera.update();
 
 		coinList = new ArrayList<>();
 //		coinList.add(new Coin(new Vector2(0,0)));
@@ -230,6 +240,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 		if(Gdx.input.isKeyPressed(Input.Keys.S)) start = true;
 
+		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {camera.zoom += 0.05f;}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {camera.zoom -= 0.05f;}
+
 //		camera.position.x = heroBody.getPosition().x;
 //		camera.position.y = heroBody.getPosition().y;
 		camera.position.x = physX.getHero().getPosition().x;
@@ -250,13 +263,14 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	//	batmanAnim.step(Gdx.graphics.getDeltaTime());
 		//batch.draw(batmanAnim.getFrame(), 50f, 50f, 50f, 50f);//Почему отрисовывается только первый бэт?
-		batch.draw(chip.getFrame(), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-		label.draw(batch, "Coins gathered: " + String.valueOf(score));
+//		batch.draw(chip.getFrame(), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+		batch.draw(chip.getFrame(), chip.getRect(camera).x, chip.getRect(camera).y, chip.getRect(camera).getWidth(), chip.getRect(camera).getHeight());
+		//label.draw(batch, "Coins gathered: " + String.valueOf(score));
 
 		for (int i=0;i<coinList.size();i++){
 			int state;
 			state = coinList.get(i).draw(batch, camera);
-			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
+			if (coinList.get(i).isOverlaps(chip.getRect(camera), camera)) {
 				if (state == 0)coinList.get(i).setState();
 				if (state == 2) {
 					coinList.remove(i);

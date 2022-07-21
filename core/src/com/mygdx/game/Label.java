@@ -17,7 +17,11 @@ public class Label {
        // bitmapFont.getData().setScale(3);
     }
 
-    public void draw(SpriteBatch batch, String text){
-        bitmapFont.draw(batch,text, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+//    public void draw(SpriteBatch batch, String text){
+//        bitmapFont.draw(batch,text, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+//    }
+
+    public void draw(SpriteBatch batch, String text, int x, int y) {
+        bitmapFont.draw(batch, text, x, y + bitmapFont.getLineHeight());
     }
 }

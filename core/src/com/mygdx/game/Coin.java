@@ -39,16 +39,24 @@ public class Coin {
 
     public int draw(SpriteBatch batch, OrthographicCamera camera){
         animPlayer.step(Gdx.graphics.getDeltaTime());
-        float cx = (position.x - camera.position.x)/camera.zoom + Gdx.graphics.getWidth()/2;// Не понял конструкцию?
-        float cy = (position.y - camera.position.y)/camera.zoom + Gdx.graphics.getHeight()/2;
-//        camera.zoom = 0.5f;
+//        float cx = (position.x - camera.position.x)/camera.zoom + Gdx.graphics.getWidth()/2;// Не понял конструкцию?
+//        float cy = (position.y - camera.position.y)/camera.zoom + Gdx.graphics.getHeight()/2;
+////        camera.zoom = 0.5f;
+//
+//        batch.draw(animPlayer.getFrame(), cx, cy);
 
-        batch.draw(animPlayer.getFrame(), cx, cy);
+        float cx = (rectangle.x - camera.position.x)/camera.zoom + Gdx.graphics.getWidth()/2;
+        float cy = (rectangle.y - camera.position.y)/camera.zoom + Gdx.graphics.getHeight()/2;
+        float cW = rectangle.getWidth() / camera.zoom / 2;
+        float cH = rectangle.getHeight() / camera.zoom / 2;
+        batch.draw(animPlayer.getFrame(), cx, cy, cW, cH);
 
         if (state == 1) time -= Gdx.graphics.getDeltaTime();
         if (time < 0) {
             state = 2;
         }
+
+//        camera.zoom = 0.25f;
 
         return state;
     }
@@ -61,11 +69,24 @@ public class Coin {
 //        renderer.rect(cx, cy, rectangle.getWidth(), rectangle.getHeight());
 //    }
 
+    public void shapeDraw(ShapeRenderer renderer, OrthographicCamera camera) {
+        float cx = (rectangle.x - camera.position.x)/camera.zoom + Gdx.graphics.getWidth()/2;
+        float cy = (rectangle.y - camera.position.y)/camera.zoom + Gdx.graphics.getHeight()/2;
+        float cW = rectangle.getWidth() / camera.zoom / 2;
+        float cH = rectangle.getHeight() / camera.zoom / 2;
+        renderer.rect(cx, cy, cW, cH);
+//        camera.zoom = 0.25f;
+    }
+
     public boolean isOverlaps(Rectangle heroRect, OrthographicCamera camera) {
         float cx = (rectangle.x - camera.position.x)/camera.zoom + Gdx.graphics.getWidth()/2;
         float cy = (rectangle.y - camera.position.y)/camera.zoom + Gdx.graphics.getHeight()/2;
-        Rectangle rect = new Rectangle(cx, cy, rectangle.width, rectangle.height);
-        return rect.overlaps(heroRect);
+//        Rectangle rect = new Rectangle(cx, cy, rectangle.width, rectangle.height);
+//        return rect.overlaps(heroRect);
+        float cW = rectangle.getWidth() * camera.zoom;
+        float cH = rectangle.getHeight() * camera.zoom;
+        Rectangle rect = new Rectangle(cx, cy, cW, cH);
+        return heroRect.overlaps(rect);
     }
 
     public Rectangle getRectangle() {

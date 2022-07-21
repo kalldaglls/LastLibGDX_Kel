@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -21,13 +22,16 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class PhysX {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
     private Body hero;
     public Contact cl;
+    public List<Fixture> barrelBodys;
 
     public PhysX() {
         world = new World(new Vector2(0, -8.91f), true);
@@ -50,13 +54,13 @@ public class PhysX {
 
     public void setHeroForce(Vector2 force){hero.applyForceToCenter(force, true);}
 
-    public void addObject(MapObject obj) {
+    public void addObject(MapObject obj, Rectangle rect) {
         BodyDef def = new BodyDef();
         FixtureDef fdef = new FixtureDef();
         PolygonShape poly_h = new PolygonShape();
         CircleShape circle = new CircleShape();
 
-        String name= (String)obj.getProperties().get("name");
+        String name = (String)obj.getProperties().get("name");
 
             switch ((String)obj.getProperties().get("type")){//Выбирает, какой из типов Body мы используем!
                 case "StaticBody":
@@ -97,6 +101,12 @@ public class PhysX {
                     circle.setRadius(ellipseMapObject.getEllipse().width/2);
                     fdef.shape = circle;
                     break;
+                case "wall1" :
+                    RectangleMapObject rect3 = (RectangleMapObject) obj;
+                    def.position.set(new Vector2(rect3.getRectangle().x+rect.width/2 , rect3.getRectangle().y+rect.height/2));
+                    poly_h.setAsBox(rect.width/2 , rect.height/2);
+                    fdef.shape = poly_h;
+                    break;
 //                case "rock" :
 //                    EllipseMapObject ellipseMapObject2 = (EllipseMapObject) obj;
 //                    def.position.set(new Vector2(ellipseMapObject2.getEllipse().x + ellipseMapObject2.getEllipse().width/2,
@@ -112,22 +122,22 @@ public class PhysX {
             hero = world.createBody(def);
             hero.createFixture(fdef).setUserData(name);
 //            def.position.add(0,5);
-            poly_h.setAsBox(3,5, new Vector2(0, -7),0);
+            poly_h.setAsBox(3,20, new Vector2(0, -5),0);
             fdef.shape = poly_h;
             fdef.isSensor = true;
             hero.createFixture(fdef).setUserData("sensor");
-            poly_h.setAsBox(5,100, new Vector2(0, 7),0);
-            fdef.shape = poly_h;
-            fdef.isSensor = true;
-            hero.createFixture(fdef).setUserData("sensor");
-            poly_h.setAsBox(3,5, new Vector2(7, 0),0);
-            fdef.shape = poly_h;
-            fdef.isSensor = true;
-            hero.createFixture(fdef).setUserData("sensor");
-            poly_h.setAsBox(3,5, new Vector2(-7, 0),0);
-            fdef.shape = poly_h;
-            fdef.isSensor = true;
-            hero.createFixture(fdef).setUserData("sensor");
+//            poly_h.setAsBox(5,5, new Vector2(0, 7),0);
+//            fdef.shape = poly_h;
+//            fdef.isSensor = true;
+//            hero.createFixture(fdef).setUserData("sensor");
+//            poly_h.setAsBox(3,5, new Vector2(7, 0),0);
+//            fdef.shape = poly_h;
+//            fdef.isSensor = true;
+//            hero.createFixture(fdef).setUserData("sensor");
+//            poly_h.setAsBox(3,5, new Vector2(-7, 0),0);
+//            fdef.shape = poly_h;
+//            fdef.isSensor = true;
+//            hero.createFixture(fdef).setUserData("sensor");
         } else {
             world.createBody(def).createFixture(fdef).setUserData(name);
         }
@@ -243,6 +253,21 @@ public class PhysX {
                     //def.awake = true;
                     break;
 
+                case "conus" :
+                    PolygonMapObject conusObj = (PolygonMapObject) obj;
+                    Vector2 pos = new Vector2((float)conusObj.getProperties().get("x"), (float)conusObj.getProperties().get("y"));
+                    float[] tmp = conusObj.getPolygon().getVertices();
+                    poly_h.set(tmp);
+                    def.position.set(pos);
+                    //def.angle = (float) obj.getProperties().get("angle")*MathUtils.degreesToRadians;
+                    fdef.shape = poly_h;
+                   // EllipseMapObject ellipseMapObject = (EllipseMapObject) obj;
+//                    def.position.set(new Vector2(ellipseMapObject.getEllipse().x + ellipseMapObject.getEllipse().width/2,
+//                            ellipseMapObject.getEllipse().y +ellipseMapObject.getEllipse().height/2));
+//                    circle.setRadius(ellipseMapObject.getEllipse().width/2);
+//                    fdef.shape = circle;
+                    break;
+
 //                case "lader1" :
 //                    def.gravityScale =(float)obj.getProperties().get("gravityScale");
 //                    RectangleMapObject rect3 = (RectangleMapObject) obj;
@@ -269,6 +294,19 @@ public class PhysX {
     public void dispose(){
         world.dispose();
         debugRenderer.dispose();
+    }
+
+    public int barrelInit() {
+        Array<Fixture> fixtureArray = new Array<>(world.getBodyCount());
+        world.getFixtures(fixtureArray);
+        barrelBodys = new ArrayList<Fixture>();
+        for (Fixture bdy: fixtureArray) {
+            if (bdy.getUserData() != null) {
+                String name = (String) bdy.getUserData();
+                if (name.equals("bomb")){barrelBodys.add(bdy);}
+            }
+        }
+        return barrelBodys.size();
     }
 
     public class Contact implements ContactListener {
